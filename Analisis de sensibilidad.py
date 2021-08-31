@@ -59,8 +59,6 @@ for n in range(n_const):
     print("La restricción "+str(const[n])+" "+str(b[n]))
 print("\n")
 
-md2 = Model('Problema Aplicado')
-
 '''
 Una empresa de muebles planea introducir una línea para jardín que conste de sillas, mecedoras y sillones.
 Cada mueble requiere madera, plástico y aluminio para su fabricación de acuerdo con la siguiente tabla.
@@ -84,17 +82,24 @@ z = número de sillones producidos
 link ejercicio: http://practicasprofesionales.ula.edu.mx/documentos/ULAONLINE/Licenciatura/Ing_ind_prod/PMI402/Semana%204/PMI402_S4_E_Ejem_met_Sim.pdf
 '''
 
+# Se nombra el modelo
+md2 = Model('Problema Aplicado')
+
+# Se crean las variables
 x = md2.continuous_var(name='x')
 y = md2.continuous_var(name='y')
 z = md2.continuous_var(name='z')
 
+# Se introduce la funcion objetivo
 md2.maximize(21*x+24*y+36*z)
+
+# Se introducen las restricciones
 md2.add_constraint(x+y+z <= 400)
 md2.add_constraint(x+y+2*z <= 500)
 md2.add_constraint(2*x+3*y+5*z <= 1450)
 
+# Se soluciona el sistema
 solution2 = md2.solve(log_output=True)
-
 print("\nSolucion del sistema\n")
 print(solution2)
 
